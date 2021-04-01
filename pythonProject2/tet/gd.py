@@ -1,5 +1,5 @@
-#업데이트할 W : Learning Rate * ((Y예측 - Y실제) * X)평균
-#업데이트할 b : Learning Rate * ((Y예측 - Y실제) * 1)평균
+#업데이트할 W : Learning Rate * ((Y예측 - Y실제) * X)/평균
+#업데이트할 b : Learning Rate * ((Y예측 - Y실제) * 1)/평균
 
 import numpy as np
 import matplotlib.pyplot as plt

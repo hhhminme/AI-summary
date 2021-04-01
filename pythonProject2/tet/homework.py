@@ -1,54 +1,50 @@
 import numpy as np
-import matplotlib.pylab as plt
+import matplotlib.pyplot as plt
 
+X = 1
+#초기 X 인풋값
+Y = 5
+#임의의 Y타겟값.
+#임의의 선형 수식은 Y = X로 구현
+plt.scatter(X,X)
+##Gradient Descent 구현
+#업데이트할 W : Learning Rate * ((Y예측 - Y실제) * X)/2
+#업데이트할 b : Learning Rate * ((Y예측 - Y실제) * 1)/2
+#초기 w값과 b값 지정
+W = 2
+b = 1
 
-def _numerical_gradient_no_batch(f, x):
-    h = 1e-4  # 0.0001
-    grad = np.zeros_like(x)
-    tmp_val = x
-    # f(x+h) 계산
-    x = float(tmp_val) + h
-    fxh1 = f(x)
+#학습률은 0.1과 0.2로진행
+learning_rate = 0.1
+learning_rate2 = 0.2
 
-    # f(x-h) 계산
-    x = tmp_val - h
-    fxh2 = f(x)
+#에포크를 200번정도 돌려보면서 학습 시켜볼 예정이다.
+for epoch in range(200):
+    Y_Pred = W * X + b #예측값
 
-    grad = (fxh1 - fxh2) / (2 * h)
-    x = tmp_val
-    # 값 복원
-    return grad
+    error = np.abs(Y_Pred - Y)/2
+    if Y_Pred >= Y: #예측값이 타겟값보다 커질경우 학습을 종료한다.
+        break
+    #gradient descent 계산
+    w_grad = learning_rate2 * ((Y_Pred - Y)*X)/2
+    b_grad = learning_rate2 * ((Y_Pred - Y))/2
+    #움직여야할 방향을 정한 것이다.
 
-def numerical_gradient(f, X):
-    return _numerical_gradient_no_batch(f, X)
+    #W,b 값 갱신
+    W = W - w_grad
+    b = b - b_grad
 
-def gradient_descent(f, init_x, lr=0.1, step_num=10):
-    x = init_x
-    x_history = []
+    # 10번째마다 학습현황을 파악
+    if epoch % 10 == 0:
+        Y_Pred = W * X + b
+        print("epoch------{0}".format(epoch))
+        print('y_pred : {0} , y : {1}'.format(Y_Pred,Y))
+        print('w_grad : {0} , W : {1}'.format(w_grad,W))
+        print('b_grad : {0} , b : {1}'.format(b_grad,b))
+        print('error : {0}'.format(error))
+        plt.scatter(Y_Pred,Y_Pred)
 
-    for i in range(step_num):
-        x_history.append(x)
-
-        grad = numerical_gradient(f, x)
-        x += lr * grad
-
-    return x, np.array(x_history)
-
-
-def function(x):
-    return x
-
-init_x = 1
-lr = 0.1
-step_num = 50
-x, x_history = gradient_descent(function, init_x, lr=lr, step_num=step_num)
-
-plt.plot( [-10, 10], [0,0], '--b')
-plt.plot( [0,0], [-10, 10], '--b')
-plt.plot(x_history[:], x_history[:], 'o')
-
-plt.xlim(-10, 10)
-plt.ylim(-10, 10)
-plt.xlabel("X0")
-plt.ylabel("X1")
+plt.title('gradient descent homework, Learning_rate = 0.2')
+plt.xlabel('x axis')
+plt.ylabel('y axis')
 plt.show()
