@@ -13,6 +13,7 @@ trainData[dataNum:dataNum*2,:] =trainData2
 trainout = np.zeros((dataNum*2,1))
 trainout[dataNum:dataNum*2,:] = np.zeros((dataNum,1)) + 1
 
+print(trainout)
 
 figure = plt.figure()
 ax = plt.gca()
