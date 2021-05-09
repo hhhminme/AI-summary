@@ -30,9 +30,9 @@ ax.plot(trainData2[:, 0],trainData2[:, 1],"*")
 step = 100
 input = 2
 out = 1
-w = np.random.rand(input,out)
+w = np.random.rand(input,out) #2 X 1 (입력값이 두개라 그런듯 w1,w2)
 b = np.random.randn(1)
-a = np.arange(-3,6,0.1)
+a = np.arange(-3,6,0.1) # -3부터 6까지 0.1 step 만큼 증가하는 array를 만들어 주겠다.
 #a 는 활성 함수값
 # x1과 x2에 대한 관계식으로 나타나게 된다. 그리고 이걸 x1과 x2를 구분하기 위한 학습시킨다.
 # 결졍 경계, 초평면 이라고 부른다.

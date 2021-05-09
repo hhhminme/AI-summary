@@ -1,15 +1,16 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
-x_data = np.array([1, 2, 3, 4, 5]).reshape(5, 1)
-t_data = np.array([2, 3, 4, 5, 6]).reshape(5, 1)
+x_data = np.array([1.0])
+t_data = np.array([5.0])
 # 학습데이터 행렬로 변경
 
 # raw_data = [[1,2],[2,3],[3,4],[4,5],[5,6]]
 # 입력값과 정답값이 함께 주어진다면 list comprihension을 통해 분리시켜야한다. 생각해보기
 
-W = np.random.rand(1, 1)
+W = np.array([2.0])
 # 0과 1사이의 랜덤 값
-b = np.random.rand(1)
+b = np.array([1.0])
 print("W = ", W, "W.shape = ", W.shape, "b = ", b, "b.shape = ", b.shape)
 
 
@@ -55,7 +56,7 @@ def predict(x):
     return y
 
 
-learning_rate = 1e-2
+learning_rate = 0.1
 # 발산하는 경우 1e-3 ~ 1e-6 등으로 바꾸어 실행
 
 f = lambda x: loss_func(x_data, t_data)
@@ -67,7 +68,13 @@ for step in range(8001):
     W -= learning_rate * numerical_derivative(f, W)
     b -= learning_rate * numerical_derivative(f, b)
 
-    if step % 400 == 0:
-        print("step = ", step, "error_value = ", error_val(x_data, t_data), "W = ", W, " b = ", b)
+    if error_val(x_data,t_data) <= 1e-10:
+        print(" BREAK step = ", step, "error_value = ", error_val(x_data, t_data), "W = ", W, " b = ", b)
+        break
 
-print(predict(50))
+    if step % 100== 0:
+        print("step = ", step, "error_value = ", error_val(x_data, t_data), "W = ", W, " b = ", b)
+        plt.scatter(step, error_val(x_data, t_data))
+
+print("Predict value : ",predict(1.0))
+plt.show()

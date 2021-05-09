@@ -30,7 +30,7 @@ b = np.random.uniform(-1.1)
 
 learning_rate = 0.7
 
-#에포크를 100번정도 돌려보면서 학습 시켜볼 예정이다.
+#에포크를 200번정도 돌려보면서 학습 시켜볼 예정이다.
 for epoch in range(200):
     Y_Pred = W * X + b #예측값
 
