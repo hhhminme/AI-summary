@@ -1,7 +1,7 @@
 import os
 import struct
 import numpy as np
-
+import matplotlib.pyplot as plt
 
 def load_mnist(path, kind='train'):
     labels_path = os.path.join(path, '%s-labels.idx1-ubyte' % kind)
@@ -21,26 +21,26 @@ print('학습 데이터 샘플수\t:%d, 컬럼수 %d' % (X_train.shape[0], X_tra
 X_test, y_test = load_mnist('C:\\Users\\허민\\Desktop\\2021-1\\인공지능\\pythonProject2\\mnist\\data\\dataset', kind='t10k')
 print('테스트 샘플 수 \t:%d, 컬럼수: %d' % (X_test.shape[0], X_test.shape[1]))
 
-# fig, ax = plt.subplots(nrows=2, ncols=5, sharex=True, sharey=True)
-# ax = ax.ravel()
-# for i in range(10):
-#     img = X_train[y_train == i][0].reshape(28, 28)
-#     ax[i].imshow(img, cmap='Greys',interpolation='nearest')
-#
-# ax[0].set_xticks([])
-# ax[0].set_yticks([])
-# plt.tight_layout()
-# plt.show()
-#
-# fig,ax = plt.subplots(nrows = 5, ncols = 5, sharex = True, sharey= True)
-# ax = ax.ravel()
-# print(X_train.shape)
-# for i in range(25):
-#     img = X_train[y_train == 6][i].reshape(28,28)
-#     ax[i].imshow(img, cmap ='Greys', interpolation='nearest')
-#
-# ax[0].set_xticks([])
-# ax[0].set_yticks([])
-# plt.tight_layout()
-# plt.show()
+fig, ax = plt.subplots(nrows=2, ncols=5, sharex=True, sharey=True)
+ax = ax.ravel()
+for i in range(10):
+    img = X_train[y_train == i][0].reshape(28, 28)
+    ax[i].imshow(img, cmap='Greys',interpolation='nearest')
+
+ax[0].set_xticks([])
+ax[0].set_yticks([])
+plt.tight_layout()
+plt.show()
+
+fig,ax = plt.subplots(nrows = 5, ncols = 5, sharex = True, sharey= True)
+ax = ax.ravel()
+print(X_train.shape)
+for i in range(25):
+    img = X_train[y_train == 4][i].reshape(28,28)
+    ax[i].imshow(img, cmap ='Greys', interpolation='nearest')
+
+ax[0].set_xticks([])
+ax[0].set_yticks([])
+plt.tight_layout()
+plt.show()
 
