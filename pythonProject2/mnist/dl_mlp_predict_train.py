@@ -11,3 +11,4 @@ accuracy = success/total
 
 print('예측성공/총개수: [%d]/[%d]' %(success,total))
 print('딥러닝 정확도: %.2f%%' %(accuracy*100))
+
